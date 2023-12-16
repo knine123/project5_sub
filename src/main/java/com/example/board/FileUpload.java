@@ -1,4 +1,4 @@
-/*package com.example.board;
+package com.example.board;/*package com.example.board;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
