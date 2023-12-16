@@ -2,12 +2,12 @@ package com.example.board;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.File;
 import java.util.Date;
 
 public class BoardVO {
 	private int seq;
 	private String title;
-	private String poster;
 
 	public String getPoster() {
 		return poster;
@@ -16,6 +16,19 @@ public class BoardVO {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
+
+	private String poster;
+
+	public String getPosterpath() {
+		return posterpath;
+	}
+
+	public void setPosterpath(String posterpath) {
+		this.posterpath = posterpath;
+	}
+
+	private String posterpath;
+
 
 	private String category;
 

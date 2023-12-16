@@ -1,13 +1,24 @@
 package com.example.board;
 
 
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 public class BoardController {
@@ -27,9 +38,9 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/addok",method = RequestMethod.POST)
-    public String addPostOK(BoardVO vo, MultipartFile file){
-        int i=boardService.insertBoard(vo);
+    public String addPostOK(BoardVO vo, MultipartFile file) {
 
+        int i=boardService.insertBoard(vo,file);
 
         if(i==0)
             System.out.println("데이터추가실패");
@@ -44,8 +55,8 @@ public class BoardController {
         return "editform";
     }
     @RequestMapping(value = "/editok",method = RequestMethod.POST)
-    public String editPostOk(BoardVO vo){
-        if(boardService.updateBoard(vo)==0)
+    public String editPostOk(BoardVO vo, MultipartFile file) {
+        if(boardService.updateBoard(vo, file)==0)
             System.out.println("데이터 수정 실패");
         else
             System.out.println("데이터 수정 성공");
@@ -67,7 +78,6 @@ public class BoardController {
             System.out.println("데이터 삭제 성공");
         return "redirect:../list";
     }
-
 
 
 }
